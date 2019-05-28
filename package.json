@@ -2,7 +2,7 @@
   "name": "019531presentation",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://ejshim.github.io/019531presentation/",
+  "homepage": "https://ejshim.github.io/019531presentation/",
   "dependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "4.1.0",
@@ -28,6 +28,7 @@
     "eslint-plugin-react-hooks": "^1.5.0",
     "file-loader": "3.0.1",
     "fs-extra": "7.0.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "4.0.0-beta.5",
     "identity-obj-proxy": "3.0.0",
     "is-wsl": "^1.1.0",
@@ -130,8 +131,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^2.0.1"
   }
 }
