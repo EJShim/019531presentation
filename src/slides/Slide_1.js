@@ -52,6 +52,7 @@ class Slide_1 extends Component{
         const camera = renderer.getActiveCamera();
 
         camera.azimuth(2);
+        camera.setViewUp(0, 1, 0);
 
         renderer.resetCameraClippingRange();
         renderWindow.render();
