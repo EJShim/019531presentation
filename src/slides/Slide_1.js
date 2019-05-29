@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import vtkActor from 'vtk.js/Sources/Rendering/Core/Actor';
-import vtkCalculator from 'vtk.js/Sources/Filters/General/Calculator';
-import vtkConeSource from 'vtk.js/Sources/Filters/Sources/ConeSource';
 import vtkGenericRenderWindow from 'vtk.js/Sources/Rendering/Misc/GenericRenderWindow';
 import vtkMapper from 'vtk.js/Sources/Rendering/Core/Mapper';
+import vtkSTLReader from 'vtk.js/Sources/IO/Geometry/STLReader';
+
+
+import mandibleData from '../resources/stl/e137-BASE_L.stl';
 
 class Slide_1 extends Component{
 
@@ -17,20 +19,26 @@ class Slide_1 extends Component{
         const renderer = genericRenderWindow.getRenderer();
         const renderWindow = genericRenderWindow.getRenderWindow();
 
-        const coneSource = vtkConeSource.newInstance({ height: 1.0 });
 
-        const mapper = vtkMapper.newInstance();
-        mapper.setInputConnection(coneSource.getOutputPort());
+        //Import STL        
+        const reader = vtkSTLReader.newInstance();
+        reader.setUrl(mandibleData, {binary:false})
+        .then((e)=>{
 
-        const actor = vtkActor.newInstance();
-        actor.setMapper(mapper);
+            const mapper = vtkMapper.newInstance();
+            mapper.setInputData(reader.getOutputData());
 
-        renderer.addActor(actor);
-        renderer.resetCamera();        
-        renderWindow.render();
+            const actor = vtkActor.newInstance();
+            actor.setMapper(mapper);
+
+            renderer.addActor(actor);
+            renderer.resetCamera();        
+            renderWindow.render();
+            
+
+            genericRenderWindow.resize();
         
-
-        genericRenderWindow.resize();
+        })        
     }
 
     render(){
