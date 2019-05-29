@@ -73,9 +73,9 @@ void main()
   gl_FragData[0] = vec4(vdf, vdf, vdf, 1.0);
   
   if (gl_FragData[0].a <= 0.0)
-    {
+  {
     discard;
-    }
+  }
 
   //VTK::DepthPeeling::Impl
 
