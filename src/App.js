@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Slide_1 from './slides/Slide_1';
 import Slide_2 from './slides/Slide_2';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 
 function App() {
 
