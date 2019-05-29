@@ -6,12 +6,10 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 function App() {
 
-  const homeComponent = (
-    <div>home</div>
-  );
+  
 
   return (
-    <div className="App">
+    <div className="App">      
       <Router basename={process.env.PUBLIC_URL}>  
       <nav>
         <ul>
@@ -19,8 +17,7 @@ function App() {
           <li><Link to="/1">Slide1</Link></li>
           <li><Link to="/2">Slide2</Link></li>
         </ul>
-      </nav>
-      
+      </nav>        
         <Route path = "/1" component={Slide_1}/>
         <Route path = "/2" component={Slide_2}/>
       </Router>
