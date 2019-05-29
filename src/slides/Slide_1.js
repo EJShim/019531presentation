@@ -4,7 +4,6 @@ import vtkGenericRenderWindow from 'vtk.js/Sources/Rendering/Misc/GenericRenderW
 import vtkMapper from 'vtk.js/Sources/Rendering/Core/Mapper';
 import vtkSTLReader from 'vtk.js/Sources/IO/Geometry/STLReader';
 
-
 import mandibleData from '../resources/stl/e137-BASE_L.stl';
 
 class Slide_1 extends Component{
@@ -30,15 +29,13 @@ class Slide_1 extends Component{
 
             const actor = vtkActor.newInstance();
             actor.setMapper(mapper);
+            actor.getProperty().setColor(151/255, 73/255, 148/255);
 
             renderer.addActor(actor);
             renderer.resetCamera();        
-            renderWindow.render();
-            
-
-            genericRenderWindow.resize();
-        
-        })        
+            renderWindow.render();            
+            genericRenderWindow.resize();        
+        });        
     }
 
     render(){
