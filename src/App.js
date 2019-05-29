@@ -11,8 +11,16 @@ function App() {
   );
 
   return (
-    <div className="App">      
-      <Router>
+    <div className="App">
+      <Router>  
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/1">Slide1</Link></li>
+          <li><Link to="/2">Slide2</Link></li>
+        </ul>
+      </nav>
+      
         <Route path = "/1" component={Slide_1}/>
         <Route path = "/2" component={Slide_2}/>
       </Router>
