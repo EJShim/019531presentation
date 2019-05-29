@@ -28,8 +28,7 @@ class Slide_1 extends Component{
             mapper.setInputData(reader.getOutputData());
 
             const actor = vtkActor.newInstance();
-            actor.setMapper(mapper);
-            actor.getProperty().setColor(151/255, 73/255, 148/255);
+            actor.setMapper(mapper);            
 
             renderer.addActor(actor);
             renderer.resetCamera();        
