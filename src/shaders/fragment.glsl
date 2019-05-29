@@ -66,11 +66,11 @@ void main()
 
 
   //Calcualte Depth, vertexVC is not normalized, need to use proper clipping range
-  float zNear = 270.0f;
-  float zFar = 275.9980426564987f;
-  float vdf = 1.0f + (vertexVC.z + zNear) * (1.0f / (zFar-zNear));
+  float zNear = 270.0;
+  float zFar = 280.0;
+  float vdf = 1.0 + (vertexVC.z + zNear) * (1.0 / (zFar-zNear));
 
-  gl_FragData[0] = vec4(vdf, vdf, vdf, 1.0f);
+  gl_FragData[0] = vec4(vdf, vdf, vdf, 1.0);
   
   if (gl_FragData[0].a <= 0.0)
     {
