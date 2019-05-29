@@ -115,8 +115,7 @@ class Slide_3 extends Component{
     render(){
         const renderer1Style={
             width:"50%",
-            height:"100%",
-            backgroundColor:'red',
+            height:"100%",            
         }
         const renderer2Style={
             position:'absolute',
@@ -124,7 +123,7 @@ class Slide_3 extends Component{
             left:'50%',
             width:'50%',
             height:'100%',
-            backgroundColor:'blue',
+            background:'black',            
         }
 
 

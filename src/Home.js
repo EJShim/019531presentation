@@ -6,8 +6,7 @@ class Home extends Component{
     render(){
         const style={
             width:"100%",
-            height:"100%",
-            backgroundColor:"darkblue",
+            height:"100%",            
         }
 
         return(
