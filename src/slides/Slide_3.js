@@ -31,8 +31,6 @@ class Slide_3 extends Component{
 
         this.genericWindowCollection = [vtkGenericRenderWindow.newInstance({background: [1,1,1]}), vtkGenericRenderWindow.newInstance({background: [0,0,0]})];
 
-        this.depthMapRange = [270.0, 280.0];
-
     }
 
     synchronizeCamera(e){        
