@@ -3,9 +3,7 @@ import vtkActor from 'vtk.js/Sources/Rendering/Core/Actor';
 import vtkGenericRenderWindow from 'vtk.js/Sources/Rendering/Misc/GenericRenderWindow';
 import vtkMapper from 'vtk.js/Sources/Rendering/Core/Mapper';
 import vtkSTLReader from 'vtk.js/Sources/IO/Geometry/STLReader';
-
-import maxilaData from '../resources/stl/e136-BASE_U.stl';
-import mandibleData from '../resources/stl/e137-BASE_L.stl';
+import vtkPointPicker from 'vtk.js/Sources/Rendering/Core/PointPicker';
 
 import LR1 from '../resources/stl/e016-LR1.stl';
 import LR2 from '../resources/stl/e017-LR2.stl';
@@ -28,15 +26,49 @@ import LL7 from '../resources/stl/e030-LL7.stl';
 
 class Slide_2 extends Component{
 
+    constructor(props){
+        super(props);
+        this.genericRenderWindow = vtkGenericRenderWindow.newInstance({background: [1, 1, 1],});
+
+
+        this.picker = vtkPointPicker.newInstance();
+        this.picker.setPickFromList(false);
+        this.picker.initializePickList();
+
+        
+    }
+
+    onMouseMove(callData){
+        const renderer = this.genericRenderWindow.getRenderer();
+        renderer.getActors().forEach(actor=>{
+            actor.getProperty().setColor(1, 1, 1);
+        })
+
+        const pos = callData.position;
+        const point = [pos.x, pos.y, 0.0];        
+        this.picker.pick(point, renderer);
+
+        if(this.picker.getActors().length < 1) return;
+
+        const targetActor = this.picker.getActors()[0];
+
+        targetActor.getProperty().setColor(1, 0, 0);
+
+
+        this.genericRenderWindow.getRenderWindow().render();
+
+
+    }
+
     componentDidMount(){
-        const genericRenderWindow = vtkGenericRenderWindow.newInstance({
-            background: [1, 1, 1],
-        });
-        genericRenderWindow.setContainer(this.refs["renderer"]);
+        
+        this.genericRenderWindow.setContainer(this.refs["renderer"]);
+        
 
 
-        const renderer = genericRenderWindow.getRenderer();
-        const renderWindow = genericRenderWindow.getRenderWindow();
+        const renderer = this.genericRenderWindow.getRenderer();
+        const renderWindow = this.genericRenderWindow.getRenderWindow();
+        renderWindow.getInteractor().onMouseMove(e=>{this.onMouseMove(e);});
 
 
         //Import STL        
@@ -57,7 +89,7 @@ class Slide_2 extends Component{
                 renderer.addActor(actor);
                 renderer.resetCamera();        
                 renderWindow.render();            
-                genericRenderWindow.resize();        
+                this.genericRenderWindow.resize();        
             });
         })        
     }
