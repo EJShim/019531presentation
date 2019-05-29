@@ -9,7 +9,7 @@ class Slide_1 extends Component{
 
     componentDidMount(){
         const genericRenderWindow = vtkGenericRenderWindow.newInstance({
-            background: [0, 0.5, 0],
+            background: [1, 1, 1],
         });
         genericRenderWindow.setContainer(this.refs["renderer"]);
 
@@ -27,7 +27,10 @@ class Slide_1 extends Component{
 
         renderer.addActor(actor);
         renderer.resetCamera();        
-        renderWindow.render();        
+        renderWindow.render();
+        
+
+        genericRenderWindow.resize();
     }
 
     render(){
