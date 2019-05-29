@@ -8,15 +8,63 @@ import mandibleData from '../resources/stl/e137-BASE_L.stl';
 
 class Slide_1 extends Component{
 
-    componentDidMount(){
-        const genericRenderWindow = vtkGenericRenderWindow.newInstance({
+    constructor(props){
+        super(props);
+
+        this.animationID = null;
+        this.fps = 25;
+        this.fpsInterval = 1000 / this.fps;        
+        this.prevTime = null;        
+
+
+        this.genericRenderWindow = vtkGenericRenderWindow.newInstance({
             background: [1, 1, 1],
         });
-        genericRenderWindow.setContainer(this.refs["renderer"]);
+    }
+    
+
+    animate(){
+        this.animationID = requestAnimationFrame( ()=>{this.animate()} );
+
+        
+
+        const now = Date.now();
+        const elapsed = now - this.prevTime;
+
+        // if enough time has elapsed, draw the next frame
+
+        if (elapsed > this.fpsInterval) {
+            
+            this.prevTime = now - (elapsed % this.fpsInterval);
+
+            // Put your drawing code here
+            this.rotateCamera();
+            
+
+        }     
+    }
 
 
-        const renderer = genericRenderWindow.getRenderer();
-        const renderWindow = genericRenderWindow.getRenderWindow();
+    rotateCamera(){
+
+        const renderWindow = this.genericRenderWindow.getRenderWindow();
+        const renderer = this.genericRenderWindow.getRenderer();
+        const camera = renderer.getActiveCamera();
+
+        camera.azimuth(2);
+
+        renderer.resetCameraClippingRange();
+        renderWindow.render();
+
+    }
+
+    componentDidMount(){
+        
+        this.genericRenderWindow.setContainer(this.refs["renderer"]);
+
+
+        const renderer = this.genericRenderWindow.getRenderer();
+        const renderWindow = this.genericRenderWindow.getRenderWindow();
 
 
         //Import STL        
@@ -33,8 +81,20 @@ class Slide_1 extends Component{
             renderer.addActor(actor);
             renderer.resetCamera();        
             renderWindow.render();            
-            genericRenderWindow.resize();        
+            this.genericRenderWindow.resize();        
+            
+            //start animation            
+            this.prevTime = Date.now();            
+            this.animate();
         });        
+
+
+
+    }
+
+
+    componentWillUnmount(){
+        cancelAnimationFrame(this.animationID);
     }
 
     render(){
